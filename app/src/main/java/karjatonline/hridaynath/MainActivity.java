@@ -31,7 +31,8 @@ public class MainActivity extends YouTubeBaseActivity implements
 
     ListView playlist;
     ArrayAdapter<String> adp;
-    String[] strPlaylist={"Ti geli tevha","Tya phulanchya gandhkoshi"};
+    String[] strPlaylist={"Ti geli tevha","Tya phulanchya gandhkoshi","Hridaynath Mangeshkar sings Jivalaga and other songs",
+            "Malvun Taak Dip","Shoor Aamhi Sardar","Maze Raani-Mahananda"};
     YouTubePlayer yp;
     LinearLayout ll;
 
@@ -45,7 +46,8 @@ public class MainActivity extends YouTubeBaseActivity implements
         setContentView(R.layout.activity_main);
 
         ll=findViewById(R.id.ll);
-        adView = new AdView(this, "874852772698575_874852956031890", AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(this, "YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
+//        adView = new AdView(this, "874852772698575_874852956031890", AdSize.BANNER_HEIGHT_50);
 
 
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
@@ -66,6 +68,14 @@ public class MainActivity extends YouTubeBaseActivity implements
                         break;
                     case 1:Config.YOUTUBE_VIDEO_CODE="R-exzGL7ouQ";
                         yp.loadVideo("R-exzGL7ouQ");
+                        break;
+                    case 2: yp.loadVideo("rKmFFd2txAc");
+                        break;
+                    case 3: yp.loadVideo("8BvLj2KYvCg");
+                        break;
+                    case 4: yp.loadVideo("k2JRdHKS-Zw");
+                        break;
+                    case 5: yp.loadVideo("LJa0u9tGc3o");
                         break;
                 }
             }
