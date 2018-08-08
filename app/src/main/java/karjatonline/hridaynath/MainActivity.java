@@ -39,182 +39,6 @@ public class MainActivity extends YouTubeBaseActivity implements
 
         setContentView(R.layout.activity_main);
 
-        yp=new YouTubePlayer() {
-            @Override
-            public void release() {
-
-            }
-
-            @Override
-            public void cueVideo(String s) {
-
-            }
-
-            @Override
-            public void cueVideo(String s, int i) {
-
-            }
-
-            @Override
-            public void loadVideo(String s) {
-
-            }
-
-            @Override
-            public void loadVideo(String s, int i) {
-
-            }
-
-            @Override
-            public void cuePlaylist(String s) {
-
-            }
-
-            @Override
-            public void cuePlaylist(String s, int i, int i1) {
-
-            }
-
-            @Override
-            public void loadPlaylist(String s) {
-
-            }
-
-            @Override
-            public void loadPlaylist(String s, int i, int i1) {
-
-            }
-
-            @Override
-            public void cueVideos(List<String> list) {
-
-            }
-
-            @Override
-            public void cueVideos(List<String> list, int i, int i1) {
-
-            }
-
-            @Override
-            public void loadVideos(List<String> list) {
-
-            }
-
-            @Override
-            public void loadVideos(List<String> list, int i, int i1) {
-
-            }
-
-            @Override
-            public void play() {
-
-            }
-
-            @Override
-            public void pause() {
-
-            }
-
-            @Override
-            public boolean isPlaying() {
-                return false;
-            }
-
-            @Override
-            public boolean hasNext() {
-                return false;
-            }
-
-            @Override
-            public boolean hasPrevious() {
-                return false;
-            }
-
-            @Override
-            public void next() {
-
-            }
-
-            @Override
-            public void previous() {
-
-            }
-
-            @Override
-            public int getCurrentTimeMillis() {
-                return 0;
-            }
-
-            @Override
-            public int getDurationMillis() {
-                return 0;
-            }
-
-            @Override
-            public void seekToMillis(int i) {
-
-            }
-
-            @Override
-            public void seekRelativeMillis(int i) {
-
-            }
-
-            @Override
-            public void setFullscreen(boolean b) {
-
-            }
-
-            @Override
-            public void setOnFullscreenListener(OnFullscreenListener onFullscreenListener) {
-
-            }
-
-            @Override
-            public void setFullscreenControlFlags(int i) {
-
-            }
-
-            @Override
-            public int getFullscreenControlFlags() {
-                return 0;
-            }
-
-            @Override
-            public void addFullscreenControlFlag(int i) {
-
-            }
-
-            @Override
-            public void setPlayerStyle(PlayerStyle playerStyle) {
-
-            }
-
-            @Override
-            public void setShowFullscreenButton(boolean b) {
-
-            }
-
-            @Override
-            public void setManageAudioFocus(boolean b) {
-
-            }
-
-            @Override
-            public void setPlaylistEventListener(PlaylistEventListener playlistEventListener) {
-
-            }
-
-            @Override
-            public void setPlayerStateChangeListener(PlayerStateChangeListener playerStateChangeListener) {
-
-            }
-
-            @Override
-            public void setPlaybackEventListener(PlaybackEventListener playbackEventListener) {
-
-            }
-        };
 
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         playlist=findViewById(R.id.playlist);
@@ -222,21 +46,17 @@ public class MainActivity extends YouTubeBaseActivity implements
         adp=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,strPlaylist);
         playlist.setAdapter(adp);
 
-        playlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        playlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:Config.YOUTUBE_VIDEO_CODE="pM3eOOP786w";
-
+                        yp.loadVideo("pM3eOOP786w");
                         break;
                     case 1:Config.YOUTUBE_VIDEO_CODE="R-exzGL7ouQ";
+                        yp.loadVideo("R-exzGL7ouQ");
                         break;
                 }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -260,6 +80,7 @@ public class MainActivity extends YouTubeBaseActivity implements
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider,
                                         YouTubePlayer player, boolean wasRestored) {
+        yp=player;
         if (!wasRestored) {
 
             // loadVideo() will auto play video
