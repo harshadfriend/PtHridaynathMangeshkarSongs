@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,11 +17,13 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+import com.facebook.ads.*;
 import java.util.List;
 
 public class MainActivity extends YouTubeBaseActivity implements
         YouTubePlayer.OnInitializedListener {
 
+    private AdView adView;
     private static final int RECOVERY_DIALOG_REQUEST = 1;
 
     // YouTube player view
@@ -30,6 +33,8 @@ public class MainActivity extends YouTubeBaseActivity implements
     ArrayAdapter<String> adp;
     String[] strPlaylist={"Ti geli tevha","Tya phulanchya gandhkoshi"};
     YouTubePlayer yp;
+    LinearLayout ll;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +44,16 @@ public class MainActivity extends YouTubeBaseActivity implements
 
         setContentView(R.layout.activity_main);
 
+        ll=findViewById(R.id.ll);
+        adView = new AdView(this, "874852772698575_874852956031890", AdSize.BANNER_HEIGHT_50);
+
 
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         playlist=findViewById(R.id.playlist);
 
+
+        ll.addView(adView);
+        adView.loadAd();
         adp=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,strPlaylist);
         playlist.setAdapter(adp);
 
@@ -63,6 +74,14 @@ public class MainActivity extends YouTubeBaseActivity implements
         // Initializing video player with developer key
         youTubeView.initialize(Config.DEVELOPER_KEY, this);
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 
     @Override
